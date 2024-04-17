@@ -83,6 +83,10 @@ a {
     padding: var(--spacing-gutter-medium);
 }
 
+.hidden-text {
+    display: none;
+}
+
 /* main {
     height: 65vh;
 } */
