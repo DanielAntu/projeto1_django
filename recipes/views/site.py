@@ -3,7 +3,7 @@ from django.http.response import HttpResponse as HttpResponse
 from django.http import Http404, JsonResponse
 from django.db.models import Q, Value, F
 from django.db.models.functions import Concat
-from .models import Recipe
+from recipes.models import Recipe
 from utils.pagination import make_pagination
 import os
 from django.views.generic import ListView, DetailView
