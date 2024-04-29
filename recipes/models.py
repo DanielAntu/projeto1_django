@@ -11,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 import os
 from django.conf import settings
 from PIL import Image
+import string
+from random import SystemRandom
 
 class Category(models.Model):
     name = models.CharField(max_length=65)
@@ -23,7 +25,7 @@ class RecipeManager(models.Manager):
         return self.filter(is_published=True).annotate(
                 author_full_name=Concat(F('author__first_name'), Value(' ('), F('author__username'), Value(')')
             )
-        ).order_by('-id')
+        ).order_by('-id').select_related('category', 'author').prefetch_related('tags')
 
 class Recipe(models.Model):
     objects = RecipeManager()
@@ -70,8 +72,14 @@ class Recipe(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug = f'{slugify(self.title)}'
-            self.slug = slug
+            rand_letters = ''.join(
+                SystemRandom().choices(
+                    string.ascii_letters + string.digits,
+                    k=5
+                )
+            )
+
+            self.slug = slugify(f'{self.title}-{rand_letters}')
 
         saved = super().save(*args, **kwargs)
 
