@@ -92,22 +92,22 @@ class Recipe(models.Model):
         
         return saved
     
-    def clean(self, *args, **kwargs):
-        ...
-        error_messages = defaultdict(list)
+    # def clean(self, *args, **kwargs):
+    #     ...
+    #     error_messages = defaultdict(list)
 
-        recipe_from_db = Recipe.objects.filter(
-            title__iexact=self.title
-        ).first()
+    #     recipe_from_db = Recipe.objects.filter(
+    #         title__iexact=self.title
+    #     ).first()
 
-        if recipe_from_db:
-            if recipe_from_db.pk != self.pk:
-                error_messages['title'].append(
-                    'Found recipes with the same title'
-                )
+    #     if recipe_from_db:
+    #         if recipe_from_db.pk != self.pk:
+    #             error_messages['title'].append(
+    #                 'Found recipes with the same title'
+    #             )
 
-        if error_messages:
-            raise ValidationError(error_messages)
+    #     if error_messages:
+    #         raise ValidationError(error_messages)
         
     class Meta:
         verbose_name = _('Recipe')
