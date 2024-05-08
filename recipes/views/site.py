@@ -1,18 +1,19 @@
-from django.shortcuts import render
-from django.http.response import HttpResponse as HttpResponse
-from django.http import Http404, JsonResponse
-from django.db.models import Q, Value, F
-from django.db.models.functions import Concat
-from recipes.models import Recipe
-from utils.pagination import make_pagination
 import os
-from django.views.generic import ListView, DetailView
-from django.forms.models import model_to_dict
+
+from django.db.models import F, Q, Value
 from django.db.models.aggregates import Count
-from django.db.models import Q
-from tag.models import Tag
+from django.db.models.functions import Concat
+from django.forms.models import model_to_dict
+from django.http import Http404, JsonResponse
+from django.http.response import HttpResponse as HttpResponse
+from django.shortcuts import render
 from django.utils import translation
 from django.utils.translation import gettext as _
+from django.views.generic import DetailView, ListView
+
+from recipes.models import Recipe
+from tag.models import Tag
+from utils.pagination import make_pagination
 
 PER_PAGE = int(os.environ.get('PER_PAGE', 6))
 
