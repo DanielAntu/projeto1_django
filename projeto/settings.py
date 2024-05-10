@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
 import os
-from django.contrib.messages import constants
 from datetime import timedelta
+from pathlib import Path
+
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'rest_framework_simplejwt',
     'rest_framework',
     'recipes',
@@ -72,6 +74,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -188,4 +191,8 @@ MESSAGE_TAGS = {
 
 INTERNAL_IPS = [
     "127.0.0.1",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5500'
 ]
